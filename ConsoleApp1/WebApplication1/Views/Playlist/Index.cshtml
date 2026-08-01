@@ -8,10 +8,10 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2>🎵 Protected YouTube Playlist Builder</h2>
+            <h1 class="display-4 fw-bold">Playlist</h1>
             <p class="text-muted mb-0">
                 Welcome,
-                <strong>@ViewBag.Username</strong>
+                <strong>@ViewBag.Username!</strong>
             </p>
         </div>
 
@@ -40,60 +40,60 @@
     {
         @foreach (var playlist in Model)
         {
-            <div class="card mb-4 shadow-sm">
+            <div class="card mb-4">
 
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">@playlist.Title</h4>
-                </div>
+                <div class="card-body p-4">
 
-                <div class="card-body">
+                    <h3 class="fw-bold">
+                        @playlist.Title
+                    </h3>
 
-                    <p>
-                        <strong>Created By:</strong>
-                        @playlist.CreatorName
+                    <p class="text-muted mb-4">
+                        Created by @playlist.CreatorName
                     </p>
 
-                    <h5>Tracks</h5>
+                    <table class="table table-borderless align-middle">
 
-                    @if (!playlist.Videos.Any())
-                    {
-                        <p class="text-muted">
-                            No videos added.
-                        </p>
-                    }
-                    else
-                    {
-                        <table class="table table-bordered table-hover">
-                            <thead class="table-light">
+                        <thead>
+
+                            <tr>
+                                <th>#</th>
+                                <th>Track</th>
+                                <th>Notes</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @for (int i = 0; i < playlist.Videos.Count; i++)
+                            {
                                 <tr>
-                                    <th>#</th>
-                                    <th>YouTube URL</th>
-                                    <th>Track Note</th>
+
+                                    <td>@(i + 1)</td>
+
+                                    <td>
+                                        <a href="@playlist.Videos[i].YouTubeUrl"
+                                           target="_blank"
+                                           class="text-success text-decoration-none fw-semibold">
+                                            🔗 View Video
+                                        </a>
+                                        <br />
+                                        <small class="text-muted">
+                                            @playlist.Videos[i].YouTubeUrl
+                                        </small>
+                                    </td>
+
+                                    <td>
+                                        @playlist.Videos[i].TrackNote
+                                    </td>
+
                                 </tr>
-                            </thead>
+                            }
 
-                            <tbody>
-                                @for (int i = 0; i < playlist.Videos.Count; i++)
-                                {
-                                    <tr>
-                                        <td>@(i + 1)</td>
+                        </tbody>
 
-                                        <td>
-                                            <a href="@playlist.Videos[i].YouTubeUrl"
-                                               target="_blank">
-                                                @playlist.Videos[i].YouTubeUrl
-                                            </a>
-                                        </td>
-
-                                        <td>
-                                            @playlist.Videos[i].TrackNote
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-
-                        </table>
-                    }
+                    </table>
 
                 </div>
 
