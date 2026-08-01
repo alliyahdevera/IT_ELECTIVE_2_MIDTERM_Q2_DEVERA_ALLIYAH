@@ -1,0 +1,102 @@
+﻿@model List<WebApplication1.Models.Entities.Playlist>
+
+@{
+    ViewData["Title"] = "My Playlists";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>🎵 Protected YouTube Playlist Builder</h2>
+            <p class="text-muted mb-0">
+                Welcome,
+                <strong>@ViewBag.Username</strong>
+            </p>
+        </div>
+
+        <div>
+            <a asp-controller="Playlist"
+               asp-action="Create"
+               class="btn btn-success">
+                + Create Playlist
+            </a>
+
+            <a asp-controller="Auth"
+               asp-action="Logout"
+               class="btn btn-outline-danger">
+                Logout
+            </a>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No playlists available.
+        </div>
+    }
+    else
+    {
+        @foreach (var playlist in Model)
+        {
+            <div class="card mb-4 shadow-sm">
+
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">@playlist.Title</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <p>
+                        <strong>Created By:</strong>
+                        @playlist.CreatorName
+                    </p>
+
+                    <h5>Tracks</h5>
+
+                    @if (!playlist.Videos.Any())
+                    {
+                        <p class="text-muted">
+                            No videos added.
+                        </p>
+                    }
+                    else
+                    {
+                        <table class="table table-bordered table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>YouTube URL</th>
+                                    <th>Track Note</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @for (int i = 0; i < playlist.Videos.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@(i + 1)</td>
+
+                                        <td>
+                                            <a href="@playlist.Videos[i].YouTubeUrl"
+                                               target="_blank">
+                                                @playlist.Videos[i].YouTubeUrl
+                                            </a>
+                                        </td>
+
+                                        <td>
+                                            @playlist.Videos[i].TrackNote
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    }
+
+                </div>
+
+            </div>
+        }
+    }
