@@ -13,8 +13,8 @@ namespace WebApplication1.Data
                 CreatorName = "System",
                 Videos = new List<VideoItem>
                 {
-                    new VideoItem { YouTubeUrl = "(https://www.youtube.com/watch?v=ApXoWvfEYVU)", TrackNote = "Post Malone, Swae Lee - Sunflower"},
-                    new VideoItem { YouTubeUrl = "(https://youtu.be/Y88LVU7MAe4?si=iOwPAGmgYYtHCGuP)", TrackNote = "Blackway & Black Caviar - What's Up Danger" }
+                    new VideoItem { YouTubeUrl = "[https://www.youtube.com/watch?v=ApXoWvfEYVU](https://youtu.be/)...", TrackNote = "Post Malone, Swae Lee - Sunflower"},
+                    new VideoItem { YouTubeUrl = "[https://youtu.be/Y88LVU7MAe4?si=iOwPAGmgYYtHCGuP](https://youtu.be/)...", TrackNote = "Blackway & Black Caviar - What's Up Danger" }
                 }
             }
         };
